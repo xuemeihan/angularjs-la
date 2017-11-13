@@ -1,0 +1,23 @@
+
+
+metro-cams,
+[metro-cams] {
+  @extend .full;
+  padding: 2rem;
+
+  .title {
+    font-size: 2.5em;
+    color: white;
+  }
+
+  ng-carousel {
+    @extend .full;
+
+    slide {
+      img {
+        width: 100%;
+        height: 88%;
+      }
+    }
+  }
+}

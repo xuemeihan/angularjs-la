@@ -1,0 +1,22 @@
+
+<div ng-transclude="scheduleHead"></div>
+<div ng-transclude="scheduleList">
+  <ul class="list">
+    <li ng-repeat="item in $ctrl.data track by $index">
+      <hr noshade="noshade" size="1"/>
+      <div class="layout-row">
+        <div ng-style="{color: item.color}" class="list-marker">⬤</div>
+        <div class="flex-1">
+          <div class="route">{{ item.route }}</div>
+          <div class="time-container layout-row">
+            <div ng-repeat="time in item.times track by $index" ng-if="$index &lt; 3" ng-animate="'animate'" class="flex-1 time">
+              <div>{{ time ? time + ' mins' : '' }}</div>
+            </div>
+            <div ng-if="item.times.length &lt; 3" class="flex-1 time"></div>
+            <div ng-if="item.times.length &lt; 2" class="flex-1 time"></div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

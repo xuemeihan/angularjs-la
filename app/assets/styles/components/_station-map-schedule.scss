@@ -1,0 +1,110 @@
+
+
+station-map-schedule {
+  color: white;
+  padding: 2em;
+  display: block;
+
+  &-head {
+    .title {
+      text-align: center;
+      margin: 0;
+      font-size: 2em;
+
+      img.icon {
+        height: 0.75em;
+        margin-top: 0.1em;
+        margin-right: 0.5em;
+      }
+    }
+
+    .date {
+      text-align: center;
+    }
+
+    .sub-title {
+      text-align: center;
+      color: yellow;
+      //      font-size: 2.7vmin;
+      font-size: 1em;
+      line-height: 200%;
+    }
+  }
+
+  .list {
+    > * {
+
+      &:not(:first-child):before {
+        content: ' ';
+        display: block;
+        width: 60%;
+        border-top: 0.1vmin solid rgba(255,255,255,.5);
+        margin: 2vh auto;
+      }
+
+      .list-marker {
+        font-size: 1em;
+        margin: 0;
+        padding: 0;
+        width: 1.5em !important;
+      }
+
+      .marquee-title {
+        @include marquee(36vw);
+      }
+
+      .route-container {
+        height: 1.5em;
+
+        .route {
+          font-size: 1em;
+        }
+      }
+
+      .time-container {
+        font-size: .8em;
+
+        .time {
+          text-align: center;
+          display: inline-block;
+          width: 33.33%;
+
+          &:first-child {
+            text-align: left;
+            color: yellow;
+          }
+
+          &:nth-child(3) {
+            text-align: right;
+          }
+
+          &.empty {
+            color: gray;
+          }
+        }
+      }
+    }
+  }
+
+  hr {
+    width: 60%;
+    border-top: 1px solid #424242;
+    border-width: 1px 0 0 0;
+  }
+
+  .delimiter {
+    //flex: 0 0 .1vmin;
+    position: relative;
+    background-color: #000000;
+
+    div {
+      height: 50%;
+      width: 0.1vmin;
+      background-color: rgba(255,255,255,.5);
+      position: absolute;
+      top: 25%;
+    }
+  }
+
+
+}

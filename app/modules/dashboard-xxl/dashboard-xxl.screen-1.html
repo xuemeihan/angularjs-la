@@ -1,0 +1,27 @@
+
+<!--div(style="position: absolute; top: 50%; border: 1px solid green; width: 100%; z-index: 1000;")-->
+<!--div(style="position: absolute; left: 50%; border: 1px solid green; height: 100%; z-index: 1000;")-->
+<div class="widget metro-map">
+  <ng-carousel ng-carousel-name="maps-carousel" class="full">
+    <slidecontainer class="carousel-slides">
+      <slide><img src="assets/images/station-map/union_station_diag.jpg" class="full-w"/></slide>
+      <slide>
+        <iframe src="https://go511.com/Map/EmbeddedMap?bgColour=ffffff&amp;center=34.06,-118.21&amp;zoom=10&amp;layers=trafficSpeed,incident,sigalert,construction,closures&amp;showAlert=true&amp;showLegend=false&amp;showMapControls=false" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" class="map"></iframe>
+      </slide>
+      <slide><img src="assets/images/station-map/metrolink_amtrak_map.jpg" class="full-w"/></slide>
+      <slide>
+        <iframe src="https://go511.com/Map/EmbeddedMap?bgColour=ffffff&amp;center=34.06,-118.21&amp;zoom=13&amp;layers=trafficSpeed,incident,sigalert,construction,closures&amp;showAlert=true&amp;showLegend=false&amp;showMapControls=false" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" class="map"></iframe>
+      </slide>
+      <slide ng-repeat="mapIndex in [1, 2, 3, 4, 5] track by $index" class="station-map-container">
+        <station-map map-index="mapIndex" schedule-data="$ctrl.stationBusSchedule"></station-map>
+      </slide>
+    </slidecontainer>
+  </ng-carousel>
+  <div class="alert-header"><img src="assets/images/logo-511.png" class="logo-511"/><b>&nbsp;Advisories:&nbsp;</b>
+    <div class="alert-line">
+      <ul>
+        <li ng-repeat="text in $ctrl.texts" class="slide-up">{{ text.Message }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

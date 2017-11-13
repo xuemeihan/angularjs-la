@@ -1,0 +1,25 @@
+
+<div class="twitter-container">
+  <div class="twitter-header-511">
+    <div class="twitter-header-511-content">
+      <img src="assets/images/bird.png"/>
+    </div>
+    <div style="width: 3rem;" class="twitter-header-511-content">&nbsp;</div>
+    <div style="font-size: 200%;" class="twitter-header-511-content">
+      <span></span>Follow @go511 for current travel information</div>
+    </div>
+    <div ng-class="{'fade-in': $ctrl.twitAppear, 'fade-out': $ctrl.twitDisappear}" class="twitter-messages">
+      <div class="message">
+        <div style="border-radius: 20%; height: 5.6rem; width: 5.6rem;" class="message-head">
+          <img ng-src="{{ $ctrl.prediction.user.profileImageUrl}}"/>
+        </div>
+        <div style="width: 1rem;" class="message-head">&nbsp;</div>
+        <div style="width: 30rem;" class="message-head">
+          <h4>{{$ctrl.prediction.user.name}}</h4><span>@{{$ctrl.prediction.user.screenName}}</span>
+        </div>
+        <div class="message-text"><span>
+          <hr noshade="noshade" size="1" style="margin-bottom: 1em; margin-top: 0; width: 100%"/>{{$ctrl.prediction.text}}</span></div>
+        </div>
+        <div class="picture"><img ng-src="{{ $ctrl.prediction.images.length &amp;&amp; $ctrl.prediction.images[0] || 'assets/images/transparent_100x100.gif' }}"/></div>
+      </div>
+    </div>

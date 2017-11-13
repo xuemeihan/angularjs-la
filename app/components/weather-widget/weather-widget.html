@@ -1,0 +1,7 @@
+
+<div class="_col">
+  <div class="description">{{ $ctrl.weatherData.description }}</div>
+  <div class="_row big"><i class="icon wi wi-owm-{{ $ctrl.weatherData.weatherId }}"></i>
+    <div class="temp">{{ $ctrl.weatherData.temp | number:0 }}{{ $ctrl.weatherData.units }}</div>
+  </div>
+</div>

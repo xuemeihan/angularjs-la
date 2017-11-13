@@ -1,0 +1,53 @@
+
+
+@mixin marquee($width) {
+  @keyframes marquee-text-#{$width} {
+    0% {
+      transform: translateX(0);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+    30% {
+      transform: translateX(0);
+    }
+    40% {
+      transform: translateX(0) translateX(-100%) translateX($width);
+      overflow: visible;
+      width: auto;
+    }
+    60% {
+      transform: translateX(0) translateX(-100%) translateX($width);
+      overflow: visible;
+      width: auto;
+    }
+    70% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(0);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+  }
+
+  width: $width;
+  position: relative;
+  height: 1.5em;
+  overflow: hidden;
+  text-align: left;
+
+  :first-child {
+    position: absolute;
+    display: inline-block;
+    min-width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    //animation: marquee-text-#{$width} 10s linear 0s infinite normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+}

@@ -1,0 +1,20 @@
+
+<metro-schedule-head>
+  <div ng-transclude="metroScheduleTitle" class="title">Schedule</div>
+  <div class="sub-title">{{ $ctrl.predictions.length > 0 ? 'Next Departures' : 'Unused' }}</div>
+</metro-schedule-head>
+<div ng-transclude="metroScheduleList">
+  <div class="list">
+    <div ng-repeat="item in $ctrl.predictions track by $index" ng-if="$ctrl.predictions.length &gt; 0" class="row item">
+      <div ng-if="item.color" ng-style="{color: item.color}" class="col s2 list-marker">⬤</div>
+      <div ng-class="{s10: item.color, s12: !item.color}" class="col">
+        <div class="route-container marquee-title">
+          <div class="route">{{ item.route }}</div>
+        </div>
+        <div class="time-container">
+          <div ng-repeat="p in item.predictions track by $index" ng-if="$index &lt; 3" ng-animate="'animate'" class="time">{{ p.text }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+
+<div class="widget widget-cam">
+  <div class="informers">
+    <div class="items">
+      <div class="item">
+        <div class="description">{{ $ctrl.timeNow | amDateFormat:'MMMM' }}</div>
+        <div class="big">{{ $ctrl.timeNow | amDateFormat:'DD' }}</div>
+      </div>
+      <div class="delimiter"></div>
+      <div class="item">
+        <div class="description">Time</div>
+        <div class="big">{{ $ctrl.timeNow | amDateFormat:'h:mm' }}</div>
+      </div>
+      <div class="delimiter"></div>
+      <div class="item">
+        <weather-widget></weather-widget>
+      </div>
+    </div>
+  </div><br/>
+  <twitter></twitter>
+</div>

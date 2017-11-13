@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>LA Metro</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="icon" type="image/png" href="/favicon.png" />-->
+
+    <!-- build:css({.tmp/serve,app}) assets/styles/vendor.css -->
+      <!--<link rel="stylesheet" href="assets/styles/vendor.css">-->
+      <!-- bower:css -->
+      <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,app}) assets/styles/app.css -->
+      <!-- inject:css -->
+      <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+
+  <body ng-app="app">
+    <app-layout></app-layout>
+
+    <!-- build:js(app) assets/scripts/vendor.js -->
+      <!-- bower:js -->
+      <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp/serve,.tmp/partials,app}) assets/scripts/app.js -->
+      <!-- inject:js -->
+      <!-- endinject -->
+
+      <!-- inject:partials -->
+      <!-- endinject -->
+    <!-- endbuild -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFl4OLL_ZeGFZ3wMk4UPopX2WZKvv5Mqs" async defer></script>
+  </body>
+</html>

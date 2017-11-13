@@ -1,0 +1,92 @@
+
+bike-share {
+  @extend metro-schedule;
+
+  metro-schedule-head {
+    .title {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .bike-share {
+    height: 44vw;
+    overflow: hidden;
+
+    .station {
+
+      &.slide-up {
+        transition: 2s linear all;
+
+        &.ng-leave {
+          margin-top: 0px;
+        }
+
+        &.ng-leave.ng-leave-active {
+          margin-top: -15vw;
+        }
+      }
+
+      font-size: 1em;
+      line-height: 200%;
+      text-align: center;
+
+      .title {
+        background-color: #c3d626;
+        color: black;
+        font-size: 1.2em;
+        line-height: 1.7em;
+        font-weight: bold;
+        margin-bottom: .2rem;
+
+        @extend .text-ellipsis;
+      }
+
+      .address {
+        margin-bottom: .2rem;
+
+        @extend .text-ellipsis;
+      }
+
+      .items {
+        @extend ._row;
+        justify-content: center;
+        //margin-bottom: 1em;
+
+        .item {
+          @extend ._col;
+          padding: 0 1em;
+          margin-bottom: .5em;
+          font-size: 1.3rem;
+
+          .count {
+            font-size: 2.5rem;
+            line-height: 1.5rem;
+            font-weight: bold;
+          }
+        }
+
+        .delimiter {
+          position: relative;
+
+          width: 1px;
+          margin: 0 0 2.5rem;
+          background-color: #3f3f3f;
+
+          //&:after {
+          //  $height: 60%;
+          //
+          //  position: absolute;
+          //  top: ((100% - $height) / 2);
+          //  height: $height;
+          //  content: " ";
+          //  width: 0.1vmin;
+          //  background-color: rgba(255,255,255,.5);
+          //}
+        }
+      }
+
+    }
+  }
+
+
+}

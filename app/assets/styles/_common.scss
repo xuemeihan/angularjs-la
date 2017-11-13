@@ -1,0 +1,138 @@
+//// FLEX
+.flex {
+  display: flex;
+}
+
+.flex- {
+  &1, &b { flex: 1; }
+  &0, &nb { flex: 0; }
+  &1-0, &bns { flex: 1 0; }
+  &0-1, &nbs { flex: 0 1; }
+  &1-1, &bs { flex: 1 1; }
+  &full { flex: 1 0 100%; }
+}
+
+.layout-row,
+._row {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+}
+
+.layout-col,
+.layout-column,
+._col {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  &-w, &-width {
+    width: 100%;
+  }
+  &-h, &-height {
+    height: 100%;
+  }
+}
+
+ui-view,
+[ui-view] {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+//// Global
+html, body {
+  width: 100%;
+  height: 100%;
+  font-size: 2vmin;
+  background-color: black;
+}
+
+table {
+  tr td {
+    padding: 0;
+  }
+}
+
+.main-wrapper {
+  height: 100%;
+}
+
+
+body > app-layout {
+  height: 100%;
+}
+
+
+////
+.module-main {
+  height: 100%;
+}
+
+.app-module {
+  height: 100%;
+}
+
+
+////
+.module-main {
+  .alert-line {
+    background-color: #d2232a;
+    color: white;
+    padding: 0.5vmin 2vmin 0 2vmin;
+
+    iframe {
+      border: none;
+      overflow: hidden;
+    }
+  }
+
+  .schedules {
+    metro-schedule, metro-schedule-2, metro-alert {
+      background-color: #000000;
+      color: white;
+
+      .title {
+        text-align: center;
+      }
+    }
+
+    .delimiter {
+      width: 0.5vmin;
+      color: white;
+    }
+  }
+
+}
+
+
+.bg-black {
+  background-color: black;
+}
+
+.btw-schedule {
+  width: 1px;
+  background-color: #7f7f7f;
+  margin: 14% 0 7%;
+}
+
+.br-dark-grey {
+  border-color: #3f3f3f;
+}
+
+.br-light-gray {
+  border-color: #7f7f7f;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

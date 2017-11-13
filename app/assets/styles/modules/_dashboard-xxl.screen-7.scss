@@ -1,0 +1,36 @@
+.directions {
+  height: 100%;
+  width: auto;
+}
+.info-text {
+  color: black;
+}
+.test2 {
+  background: #fff;
+  border: 1px solid #000;
+//  display: initial;
+  font-size: 14px;
+  padding: 5px;
+  position: absolute;
+  top: -20px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.test3 {
+  height: 20px;
+  width: 1px;
+  left: 50%;
+  position: absolute;
+  top: 12px;
+  border: 1px solid black;
+}
+.circle {
+  background: #002671;
+  border: 1px solid #fff;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  left: 39%;
+  top: 30px;
+}

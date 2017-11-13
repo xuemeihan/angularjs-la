@@ -1,0 +1,70 @@
+
+
+metro-map,
+[metro-map] {
+  @extend .full;
+
+  position: relative;
+
+  .alert-header {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 100%;
+    z-index: 511;
+
+    .alert-line {
+      b, ul {
+        display: block;
+        float: left;
+      }
+      flex: 1;
+      float: right;
+      height: 3rem;
+      background-color: #cc1f26;
+      //font-size: 1.5em;
+      padding: .4rem .6rem;
+      color: white;
+      @extend .text-ellipsis;
+
+      .slide-up {
+        margin-bottom: .5em;
+
+        transition: 1s linear all;
+
+        &.ng-leave {
+          margin-top: 0px;
+        }
+        &.ng-leave.ng-leave-active {
+          margin-top: -2em;
+        }
+
+        &.ng-enter {
+          margin-top: 2em;
+        }
+        &.ng-enter.ng-enter-active {
+          margin-top: 0px;
+        }
+      }
+
+    }
+
+    .logo-511 {
+      height: 3rem;
+      width: 3rem;
+    }
+  }
+
+  .widget {
+    //padding-top: 20px;
+  }
+
+  .carousel-container {
+    @extend .full;
+  }
+
+
+  iframe {
+    @extend .full;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "la-metro",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-sanitize": "^1.5.8",
+    "angular-ui-router": "1.0.0-beta.1",
+    "angular-moment": "^0.10.3",
+    "jquery": "^3.1.1",
+    "ng-onload": "^0.3.0",
+    "lodash": "^4.16.4",
+    "weather-icons": "^2.0.10",
+    "angular-animate": "^1.5.8",
+    "angular-carousel": "lifely-angular-carousel#^1.2.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.0"
+  },
+  "overrides": {
+    "weather-icons": {
+      "main": [
+        "./css/weather-icons.css",
+        "./font/*"
+      ]
+    }
+  },
+  "interactive": true,
+  "resolutions": {
+    "angular": "^1.5.0"
+  }
+}

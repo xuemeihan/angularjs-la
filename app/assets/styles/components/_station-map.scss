@@ -1,0 +1,97 @@
+
+
+.station-map-container {
+  background-color: #e7e8e9;
+}
+
+station-map {
+  background-color: #e7e8e9;
+
+  > img.background {
+    margin: 8.3vh 0 0 2vw;
+    width: 96vw;
+    position: absolute;
+    top: 6.8vh;
+    left: 1.5vw;
+  }
+
+  > .schedule {
+    position: absolute;
+    top: 13.3vh;
+    left: 4vw;
+    width: 22.5vw;
+    color: black;
+    font-size: 3vh;
+    font-weight: bold !important;
+
+    & + .schedule {
+      left: auto;
+      right: 1.0vw;
+    }
+
+    station-map-schedule {
+      color: black;
+      padding: 1em 0.5em;
+
+      metro-schedule-head {
+        .title {
+          text-align: center;
+          margin: 0;
+          font-size: 2em;
+          font-weight: bold !important;
+
+          img.icon {
+            height: 0.75em;
+            margin-top: 0.1em;
+            margin-right: 0.5em;
+          }
+        }
+
+        .sub-title {
+          text-align: center;
+          color: red;
+          line-height: 120%;
+          font-weight: bold;
+          font-size: 2.5vh;
+
+          &:before, &:after {
+            display: block;
+            content: ' ';
+            width: 60%;
+            border-top: .1vmin solid rgba(0,0,0,.7);
+            margin: 1.5vh auto;
+          }
+        }
+      }
+
+
+      .list {
+        font-size: 2.5vh;
+        margin-top: 3.5vh;
+
+        &>* .time-container .time:first-child {
+          color: red;
+        }
+
+        >:not(:first-child):before {
+          border-top: .1vmin solid rgba(0,0,0,.7);
+          margin: .8vh auto;
+        }
+
+        .item {
+          //$marquee-text-width: 19.2vw;
+          margin: 0;
+
+          .marquee-title {
+            @include marquee(19.2vw);
+          }
+        }
+      }
+
+      .list-marker {
+        display: none;
+      }
+    }
+
+  }
+}

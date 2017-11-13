@@ -1,0 +1,25 @@
+
+<metro-schedule-head>
+  <h3 class="title">Metro Rail</h3>
+  <hr noshade="noshade" size="1"/>
+  <h5 class="sub-title">Alerts</h5>
+  <hr noshade="noshade" size="1"/>
+</metro-schedule-head>
+<div ng-transclude="metroScheduleList" class="metro-schedule-body">
+  <ul class="list">
+    <li ng-repeat="item in $ctrl.alerts" class="slide-up">
+      <div class="layout-row">
+        <div ng-style="{&quot;background-color&quot;: item.color}" class="list-marker">{{ item.label }}</div>
+        <div class="flex-1 list-info">
+          <div class="route">{{ item.name }}</div>
+          <div style="font-size: 0.9em; line-height: 1.4em;" class="time-container layout-row">
+            <div class="flex-1 time">
+              <div style="color: white">{{ item.alert }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr noshade="noshade" size="1" ng-class="{ 'br-dark-grey': $even, 'br-dark-grey': $odd }"/>
+    </li>
+  </ul>
+</div>

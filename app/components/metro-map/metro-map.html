@@ -1,0 +1,17 @@
+
+<div class="alert-header"><img src="assets/images/logo-511.png" class="logo-511"/>
+  <div class="alert-line"><b>Advisories:&nbsp;</b>
+    <ul style="margin: 0">
+      <li ng-repeat="text in $ctrl.texts" class="slide-up">{{ text.Message }}</li>
+    </ul>
+  </div>
+</div>
+<div class="widget">
+  <ng-carousel ng-carousel-name="maps-carousel" class="full">
+    <slidecontainer class="carousel-slides">
+      <slide ng-repeat="slide in $ctrl.maps track by $index">
+        <iframe ng-src="{{ $ctrl.$sce.trustAsResourceUrl(slide) }}" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" class="map"></iframe>
+      </slide>
+    </slidecontainer>
+  </ng-carousel>
+</div>

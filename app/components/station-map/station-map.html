@@ -1,0 +1,7 @@
+<img ng-src="{{ $ctrl.mapsSettings[$ctrl.mapIndex].bg }}" class="background"/>
+<div ng-repeat="bay in $ctrl.mapsSettings[$ctrl.mapIndex].bays" class="schedule">
+  <!--metro-schedule.flex-1.metro-rail(predictions='$ctrl.scheduleData[bay]', sub-title-use-unused="true")-->
+  <station-map-schedule predictions="$ctrl.scheduleData[bay]" sub-title-use-unused="true" class="flex-1 metro-rail">
+    <metro-schedule-title><img src="assets/images/icon-bus-black.png" class="icon"/>Bus</metro-schedule-title>
+  </station-map-schedule>
+</div>

@@ -1,0 +1,6 @@
+
+<metro-schedule predictions="$ctrl.predictions" ng-class="{'not-display': $ctrl.showAlerts}" class="flex-1 metro-rail">
+  <metro-schedule-title><img src="assets/images/icon-rail-white.png" class="icon"/>Metro Rail</metro-schedule-title>
+</metro-schedule>
+<!--iframe#alerts(src="models/maps/alerts.html", ng-class="{'display': $ctrl.showAlerts}")-->
+<metro-rail-alerts ng-class="{'display': $ctrl.showAlerts}" class="widget-schedule1"></metro-rail-alerts>

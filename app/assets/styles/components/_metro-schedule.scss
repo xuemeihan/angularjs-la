@@ -1,0 +1,164 @@
+/*#alerts {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 2.2em 1em;
+  position: absolute;
+  top:0;
+
+  transition: all linear .5s;
+  opacity: 0;
+
+  &.display {
+    opacity: 1;
+  }
+}*/
+
+metro-rail-alerts {
+  position: absolute!important;
+  top:0;
+  width: 100%!important;
+  opacity: 0;
+
+  transition: opacity linear .5s;
+  &.display {
+    opacity: 1;
+  }
+}
+
+metro-schedule, metro-schedule-2, metro-alert {
+
+  transition: opacity linear .5s;
+  &.not-display {
+    opacity: 0;
+  }
+
+  color: white;
+  padding: 2em 2em 0 2em;
+  display: block;
+  height: 100%;
+
+  &-head {
+    .title {
+      text-align: center;
+      margin: 0;
+      font-size: 2em;
+
+      img.icon {
+        height: 0.8em;
+        margin-top: 0.1em;
+        margin-right: 0.5em;
+      }
+    }
+
+    .date {
+      text-align: center;
+    }
+
+    .sub-title {
+      text-align: center;
+      color: yellow;
+//      font-size: 2.7vmin;
+      font-size: 1em;
+      line-height: 200%;
+      margin: -1vh 0;
+    }
+  }
+
+  .list {
+    margin: 0;
+    li {
+      .list-marker {
+        width: 1.8em;
+        height: 1.8em;
+        background-color: white;
+        margin-right: 3vmin;
+        margin-top: 1vmin;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 1.8em;
+        //font-size: 3vmin;
+        //font-size: 1.68em;
+        //line-height: 1em;
+        //padding-right: 3vmin;
+
+        &.amtrak, &.metrolink {
+          background-color: transparent;
+          background-image: url("../images/amtrack.png");
+          width: 3em;
+          background-size: 100%;
+          background-repeat: no-repeat;
+          border-radius: 0;
+          background-position: 0 .3em;
+        }
+
+        &.amtrak {
+          background-image: url("../images/amtrack.png");
+        }
+        &.metrolink {
+          background-image: url("../images/metrolink.png");
+        }
+        //&.circle { margin-right: 0; }
+      }
+
+      .list-info {
+        width: 80%;
+      }
+
+      .route {
+        //white-space: nowrap;
+        //overflow: hidden;
+        font-size: 1em;
+
+        @extend .text-ellipsis;
+        width: 90%;
+      }
+
+      .time-container {
+        font-size: .8em;
+
+        .time {
+          text-align: center;
+          display: inline-block;
+          width: 33.33%;
+
+          &:first-child {
+            text-align: left;
+            color: yellow;
+          }
+
+          &:nth-child(3) {
+            text-align: right;
+          }
+
+          &.empty {
+            color: gray;
+          }
+        }
+      }
+    }
+  }
+
+  hr {
+    margin: 2vw 12vw;
+    border-top: 1px solid #7f7f7f;
+    border-width: 1px 0 0 0;
+    transition: 2s linear border-color;
+  }
+
+  .delimiter {
+    //flex: 0 0 .1vmin;
+    position: relative;
+    background-color: #000000;
+
+    div {
+      height: 50%;
+      width: 0.1vmin;
+      background-color: rgba(255,255,255,.5);
+      position: absolute;
+      top: 25%;
+    }
+  }
+
+
+}

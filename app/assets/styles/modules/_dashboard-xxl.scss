@@ -1,0 +1,44 @@
+
+
+.app-module.dashboard-xxl {
+
+  table.layout-3x3 {
+    table-layout: fixed;
+    background-color: #000;;
+
+    td {
+      //border: 1px solid green;
+      width: 33.33%;
+      max-width: 33.33%;
+      height: 33.33%;
+      max-height: 33.33%;
+      padding: 0;
+      overflow: hidden;
+      text-align: center;
+      background-color: #000000;
+      color: rgba(255, 255, 255, 0.7);
+
+      &[rowspan="2"] {
+        width: 66.66%;
+        max-width: 66.66%;
+      }
+      &[colspan="2"] {
+        height: 66.66%;
+        max-height: 66.66%;
+      }
+    }
+
+    iframe {
+      @extend .full;
+      border: 0;
+    }
+  }
+
+
+  .ratio-16x9 {
+    //border: 1px solid green;
+    width: 100vw;
+    height: calc(100vw / 1.7777);
+  }
+
+}

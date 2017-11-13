@@ -1,0 +1,11 @@
+
+<div class="title">
+  <img src="assets/images/cam.png" style="width: 4rem; margin: 0 4rem;"/>
+</div>
+<ng-carousel ng-carousel-name="metro-cams-carousel" class="full">
+  <slidecontainer class="carousel-slides">
+    <slide ng-repeat="cam in $ctrl.cams track by $index">
+      <img ng-src="{{ cam }}" align="left"/>
+    </slide>
+  </slidecontainer>
+</ng-carousel>

@@ -1,0 +1,21 @@
+
+<metro-schedule-head>
+  <h3 class="title">
+    <metro-schedule-title><img src="assets/images/bike.png" class="icon"/>Bike Share</metro-schedule-title>
+  </h3>
+</metro-schedule-head>
+<div class="schedule bike-share">
+  <div ng-repeat="item in $ctrl.predictions" class="station slide-up">
+    <div class="title">{{ item.name }}</div>
+    <div class="address">{{ item.addressStreet }}</div>
+    <div class="items">
+      <div class="item">
+        <div class="count">{{ +item.bikesAvailable }}</div>bikes
+      </div>
+      <div class="delimiter"></div>
+      <div class="item">
+        <div class="count">{{ +item.docksAvailable }}</div>docks
+      </div>
+    </div>
+  </div>
+</div>

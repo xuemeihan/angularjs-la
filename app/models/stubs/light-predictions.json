@@ -1,0 +1,112 @@
+{
+  "predictions":[
+    {
+      "routeTag": "101",
+      "routeTitle": "AMTRAK PACIFIC SURFLINER",
+      "direction":{
+        "title": "AMTRAK PACIFIC SURFLINER",
+        "prediction":[
+          {
+            "minutes": "1"
+          },
+          {
+            "minutes": "10"
+          },
+          {
+            "minutes": "20"
+          }
+        ]
+      }
+    },
+    {
+      "routeTag": "102",
+      "routeTitle": "METROLINK 91 LINE",
+      "direction":{
+        "title": "METROLINK 91 LINE",
+        "prediction":[
+          {
+            "minutes": "1"
+          },
+          {
+            "minutes": "10"
+          },
+          {
+            "minutes": "20"
+          }
+        ]
+      }
+    },
+    {
+      "routeTag": "102",
+      "routeTitle": "METROLINK ANTELOPE VALLEY LINE",
+      "direction":{
+        "title": "METROLINK ANTELOPE VALLEY LINE",
+        "prediction":[
+          {
+            "minutes": "1"
+          },
+          {
+            "minutes": "10"
+          },
+          {
+            "minutes": "20"
+          }
+        ]
+      }
+    },
+    {
+      "routeTag": "103",
+      "routeTitle": "METROLINK ANTELOPE VALLEY LINE",
+      "direction":{
+        "title": "METROLINK ANTELOPE VALLEY LINE",
+        "prediction":[
+          {
+            "minutes": "1"
+          },
+          {
+            "minutes": "10"
+          },
+          {
+            "minutes": "20"
+          }
+        ]
+      }
+    },
+    {
+      "routeTag": "105",
+      "routeTitle": "METROLINK SAN BERNARDINO LINE",
+      "direction":{
+        "title": "METROLINK SAN BERNARDINO LINE",
+        "prediction":[
+          {
+            "minutes": "1"
+          },
+          {
+            "minutes": "10"
+          },
+          {
+            "minutes": "20"
+          }
+        ]
+      }
+    },
+    {
+      "routeTag": "106",
+      "routeTitle": "METROLINK VENTURA COUNTY LINE",
+      "direction":{
+        "title": "METROLINK SAN BERNARDINO LINE",
+        "prediction":[
+          {
+            "minutes": "1"
+          },
+          {
+            "minutes": "10"
+          },
+          {
+            "minutes": "20"
+          }
+        ]
+      }
+    }
+  ]
+}

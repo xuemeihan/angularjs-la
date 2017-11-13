@@ -1,0 +1,23 @@
+
+<metro-schedule-head>
+  <h3 ng-transclude="metroScheduleTitle" class="title">Schedule</h3>
+  <hr noshade="noshade" size="1"/>
+  <h5 class="sub-title">Next Departures</h5>
+  <hr noshade="noshade" size="1"/>
+</metro-schedule-head>
+<div ng-transclude="metroScheduleList" class="metro-schedule-body">
+  <ul class="list">
+    <li ng-repeat="item in $ctrl.predictions" class="slide-up">
+      <div class="layout-row">
+        <div ng-class="{'amtrak': item.icon == 'amtrak', 'metrolink': item.icon == 'metrolink'}" class="list-marker"></div>
+        <div class="flex-1 list-info">
+          <div class="route">{{ item.route }}</div>
+          <div class="time-container">
+            <div ng-repeat="p in item.predictions track by $index" ng-if="$index &lt; 3" ng-animate="'animate'" class="time">{{ p.text }}</div>
+          </div>
+        </div>
+      </div>
+      <hr noshade="noshade" size="1" ng-class="{ 'br-dark-grey': $even, 'br-dark-grey': $odd }"/>
+    </li>
+  </ul>
+</div>
