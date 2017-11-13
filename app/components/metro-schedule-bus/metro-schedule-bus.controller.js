@@ -1,7 +1,8 @@
 
 
-MetroScheduleBusController.$inject = ['$interval', 'moment', 'PredictionsModel', '$timeout'];
-function MetroScheduleBusController($interval, moment, PredictionsModel, $timeout) {
+MetroScheduleBusController.$inject = ['$scope', '$interval', 'moment', 'PredictionsModel', '$timeout'];
+function MetroScheduleBusController($scope, $interval, moment, PredictionsModel, $timeout) {
+    var vm = $scope;
     this.predictions = [];
     this.intervalId = null; // shift list item from start interval
     this.timeoutId = null; // push list item to end timeout
@@ -9,10 +10,10 @@ function MetroScheduleBusController($interval, moment, PredictionsModel, $timeou
 
     //this.refreshPredictions(); // fetch data and start scroll
     $interval(function() {
-        this.refreshPredictions();
+        vm.refreshPredictions();
     }, 30000);
 
-    this.scrollList = function() {
+    vm.scrollList = function() {
         this.intervalId = $interval(function() {
             //get first item element
             var prediction = this.predictions.shift();
@@ -40,13 +41,13 @@ function MetroScheduleBusController($interval, moment, PredictionsModel, $timeou
         }, 8000);
     }
 
-    this.refreshPredictions = function() {
+    vm.refreshPredictions = function() {
         PredictionsModel.metroBus('080214').then(function(predictions) {
             this.response = predictions;
             if (this.intervalId === null) {
                 this.predictions = this.response;
                 this.response = null;
-                this.scrollList();
+                vm.scrollList();
             }
         });
     }

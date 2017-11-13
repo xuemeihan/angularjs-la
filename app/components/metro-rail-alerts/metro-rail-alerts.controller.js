@@ -2,17 +2,18 @@ MetroRailAlertsController.$inject = ['$interval', 'moment', 'PredictionsModel', 
 
 function MetroRailAlertsController($interval, moment, PredictionsModel, $timeout, $scope) {
 
+    var vm = $scope;
     this.alerts = [];
     this.intervalId = null;
-    $scope.$on('fetch-metro-alerts', function() {
-        this.fetchAlerts();
+    vm.$on('fetch-metro-alerts', function() {
+        vm.fetchAlerts();
     });
 
-    $scope.$on('scroll-metro-alerts', function() {
-        this.scrollList();
+    vm.$on('scroll-metro-alerts', function() {
+        vm.scrollList();
     });
 
-    this.scrollList = function() {
+    vm.scrollList = function() {
         this.intervalId = $interval(function() {
             this.alerts.shift();
             if(this.alerts.length == 0) {
@@ -20,9 +21,9 @@ function MetroRailAlertsController($interval, moment, PredictionsModel, $timeout
                 $interval.cancel(this.intervalId)
             }
         }, 5000);
-    }
+    };
 
-    this.fetchAlerts = function() {
+    vm.fetchAlerts = function() {
         console.log('fetch alerts');
         // TODO hardcoded stop id
         PredictionsModel.metroAlerts().then(function(response) {

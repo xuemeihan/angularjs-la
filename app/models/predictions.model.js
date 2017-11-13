@@ -20,7 +20,7 @@ app.factory('PredictionsModel', function($http, $q) {
 
         var url = "http://scalaws.riits.net/app.php/api/stops/light-rails"; // prod
 
-        $http.get(url).then(
+        return $http.get(url).then(
             function(response) {
                 var result, ref;
                 result = [];

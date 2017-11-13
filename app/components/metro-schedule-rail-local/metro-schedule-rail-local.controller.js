@@ -2,12 +2,13 @@ MetroScheduleRailLocalController.$inject = ['$interval', 'moment', 'PredictionsM
 
 function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $timeout, $scope) {
 
+    var vm = $scope;
     this.showAlerts = false;
     this.predictions = [];
     this.intervalId = null;
     this.timeoutId = null;
     this.response = null;
-    this.displayAlerts = function() {
+    vm.displayAlerts = function() {
         $timeout(function() {
             $scope.$root.$broadcast('fetch-metro-alerts');
         }, 60000);
@@ -19,20 +20,20 @@ function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $
 
     $scope.$on('metro-alerts-scrolled', function() {
         this.showAlerts = false;
-        this.displayAlerts();
+        vm.displayAlerts();
     });
     $scope.$on('metro-alerts-not-fetched', function() {
-        this.displayAlerts();
+        vm.displayAlerts();
     });
 
     // this.refreshPredictions();
     $interval(function() {
-        this.refreshPredictions();
+        vm.refreshPredictions();
     }, 30000);
-    this.displayAlerts();
+    vm.displayAlerts();
 
 
-    this.scrollList = function() {
+    vm.scrollList = function() {
         this.intervalId = $interval(function() {
             // get first item element
             var prediction = this.predictions.shift();
@@ -80,7 +81,7 @@ function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $
         }, 8000);
     }
 
-    this.refreshPredictions = function () {
+    vm.refreshPredictions = function () {
         // TODO hardcoded stopId
         PredictionsModel.railLocal('080214').then( function(predictions) {
             this.response = predictions;
@@ -89,7 +90,7 @@ function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $
             if (this.intervalId == null) {
                 this.predictions = this.response;
                 this.response = null;
-                this.scrollList();
+                vm.scrollList();
             }
         });
     }

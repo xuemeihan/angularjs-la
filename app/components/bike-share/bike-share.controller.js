@@ -1,7 +1,8 @@
-BikeShareController.$inject = ['$interval', 'moment', 'PredictionsModel', '$timeout'];
+BikeShareController.$inject = ['$scope', '$interval', 'moment', 'PredictionsModel', '$timeout'];
 
-function BikeShareController($interval, moment, PredictionsModel, $timeout) {
+function BikeShareController($scope, $interval, moment, PredictionsModel, $timeout) {
 
+    var vm = $scope;
     this.predictions = []
     this.intervalId = null // shift list item from start iterval
     this.timeoutId = null // push list item to end timeout
@@ -9,10 +10,10 @@ function BikeShareController($interval, moment, PredictionsModel, $timeout) {
 
     //this.refreshPredictions() // fetch data and start scroll
     $interval(function() {
-        this.refreshPredictions();
+        vm.refreshPredictions();
     }, 30000);
 
-    this.scrollList = function() {
+    vm.scrollList = function() {
         this.intervalId = $interval(function() {
             // get first item element
             var prediction = this.predictions.shift();
@@ -38,13 +39,13 @@ function BikeShareController($interval, moment, PredictionsModel, $timeout) {
         }, 8000);
     }
 
-    this.refreshPredictions = function() {
-        this.PredictionsModel.bikeShare().then(function(predictions) {
+    vm.refreshPredictions = function() {
+        PredictionsModel.bikeShare().then(function(predictions) {
             this.response = predictions;
             if (this.intervalId === null) {
                 this.predictions= this.response;
                 this.response = null;
-                this.scrollList();
+                vm.scrollList();
             }
         })
     }

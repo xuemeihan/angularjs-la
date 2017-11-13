@@ -1,13 +1,14 @@
 
-MetroScheduleRailRegionalController.$inject = ['$interval', 'moment', 'PredictionsModel', '$timeout'];
+MetroScheduleRailRegionalController.$inject = ['$scope', '$interval', 'moment', 'PredictionsModel', '$timeout'];
 
-function MetroScheduleRailRegionalController($interval, moment, PredictionsModel, $timeout) {
+function MetroScheduleRailRegionalController($scope, $interval, moment, PredictionsModel, $timeout) {
+    var vm = $scope;
     this.predictions = [];
     this.intervalId = null; // shift list item from start iterval
     this.timeoutId = null; // push list item to end timeout
     this.response = null; // storage for predictions from server
 
-    this.scrollList = function() {
+    vm.scrollList = function() {
         this.intervalId = $interval(function() {
             //get first item element
             prediction = this.predictions.shift();
@@ -33,7 +34,7 @@ function MetroScheduleRailRegionalController($interval, moment, PredictionsModel
         }, 8000);
     }
 
-    this.refreshPredictions = function() {
+    vm.refreshPredictions = function() {
         // TODO hardcoded stopId
         PredictionsModel.railRegional('080214').then(function(predictions) {
             this.response = predictions;
@@ -42,12 +43,12 @@ function MetroScheduleRailRegionalController($interval, moment, PredictionsModel
             if (this.intervalId == null) {
                 this.predictions = this.response;
                 this.response = null;
-                this.scrollList();
+                vm.scrollList();
             }
         });
     }
-    this.refreshPredictions() // fetch data and start scroll
+    vm.refreshPredictions() // fetch data and start scroll
     $interval(function() {
-        this.refreshPredictions();
+        vm.refreshPredictions();
     }, 30000);
 }
