@@ -1,6 +1,9 @@
-var app = angular.module('app');
+(function(){
 
-  app.component('appLayout', {
+  angular.module('app')
+  .component('appLayout', {
     templateUrl: 'components/app-layout/app-layout.html',
-    controller: AppController
+    controller: 'AppController'
   });
+
+})();
