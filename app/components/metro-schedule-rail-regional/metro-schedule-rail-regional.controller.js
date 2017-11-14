@@ -1,54 +1,61 @@
+MetroScheduleRailRegionalController.$inject = ['$scope', '$interval', 'PredictionsModel', '$timeout'];
 
-MetroScheduleRailRegionalController.$inject = ['$scope', '$interval', 'moment', 'PredictionsModel', '$timeout'];
-
-function MetroScheduleRailRegionalController($scope, $interval, moment, PredictionsModel, $timeout) {
+function MetroScheduleRailRegionalController($scope, $interval, PredictionsModel, $timeout) {
     var vm = $scope;
-    this.predictions = [];
-    this.intervalId = null; // shift list item from start iterval
-    this.timeoutId = null; // push list item to end timeout
-    this.response = null; // storage for predictions from server
+    vm.predictions = [];
+    vm.intervalId = null; // shift list item from start iterval
+    vm.timeoutId = null; // push list item to end timeout
+    vm.response = null; // storage for predictions from server
 
-    vm.scrollList = function() {
-        this.intervalId = $interval(function() {
+    vm.scrollList = function () {
+        vm.intervalId = $interval(function () {
+            /**
+             * check if predictions
+             */
+            if (!vm.predictions) {
+                return;
+            }
             //get first item element
-            prediction = this.predictions.shift();
+            prediction = vm.predictions.shift();
 
-            this.timeoutId = $timeout(function() {
+            vm.timeoutId = $timeout(function () {
                 // wait when transtion ends and push first item element to end
-                this.predictions.push(prediction);
+                vm.predictions.push(prediction);
             }, 1000);
-            this.timeoutId.then(function() {
+            vm.timeoutId.then(function () {
                 // check if we have updates from server
-                if (this.response) {
+                if (vm.response) {
                     // insert new predictions to list
-                    this.response.forEach(function(res) {
-                        this.predictions.forEach(function(prediction) {
+                    vm.response.forEach(function (res) {
+                        vm.predictions.forEach(function (prediction) {
                             if (prediction.id = res.id) {
                                 prediction.predictions = res.predictions;
                             }
                         });
                     });
-                    this.response = null;
+                    vm.response = null;
                 }
             });
         }, 8000);
     }
 
-    vm.refreshPredictions = function() {
+    vm.refreshPredictions = function () {
         // TODO hardcoded stopId
-        PredictionsModel.railRegional('080214').then(function(predictions) {
-            this.response = predictions;
+        PredictionsModel.railRegional('080214').then(function (predictions) {
+            vm.response = predictions;
 
             // populate list first time
-            if (this.intervalId == null) {
-                this.predictions = this.response;
-                this.response = null;
+            if (vm.intervalId == null) {
+                vm.predictions = vm.response;
+                vm.response = null;
                 vm.scrollList();
             }
+        }).catch(function (e) {
+            //TODO: show some notification
         });
     }
     vm.refreshPredictions() // fetch data and start scroll
-    $interval(function() {
+    $interval(function () {
         vm.refreshPredictions();
     }, 30000);
 }

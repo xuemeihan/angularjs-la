@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.factory('PredictionsModel', function($http, $q) {
+app.factory('PredictionsModel', function ($http) {
 
     return ({
         railLocal: railLocal,
@@ -20,12 +20,19 @@ app.factory('PredictionsModel', function($http, $q) {
 
         var url = "http://scalaws.riits.net/app.php/api/stops/light-rails"; // prod
 
-        return $http.get(url).then(
-            function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(
+            function (response) {
                 var result, ref;
                 result = [];
                 if ((ref = response.data) != null) {
-                    ref.some(function(item) {
+                    ref.some(function (item) {
                         var p, prediction;
                         if (!item.direction) {
                             item.prediction = {
@@ -40,17 +47,17 @@ app.factory('PredictionsModel', function($http, $q) {
                             title: item.direction.title,
                             route: item.direction.title,
                             color: item.color,
-                            predictions: (function() {
+                            predictions: (function () {
                                 var i, len, ref1, results;
                                 ref1 = item.direction.prediction || [];
                                 results = [];
-                                for ( i = 0, len = ref1.length; i < len; i++) {
+                                for (i = 0, len = ref1.length; i < len; i++) {
                                     p = ref1[i];
                                     results.push({
                                         timestamp: p.epochTime,
                                         minutes: p.minutes,
                                         seconds: p.seconds,
-                                        text: +p.minutes? ("" + p.minutes + " min") + (+p.minutes > 1? 's' : '') : "< 1 min"
+                                        text: +p.minutes ? ("" + p.minutes + " min") + (+p.minutes > 1 ? 's' : '') : "< 1 min"
                                     });
                                 }
 
@@ -58,7 +65,7 @@ app.factory('PredictionsModel', function($http, $q) {
                             })()
                         };
 
-                        if( prediction.predictions.length == 0) {
+                        if (prediction.predictions.length == 0) {
                             prediction.predictions = [
                                 {
                                     text: "Timing is not available"
@@ -71,13 +78,14 @@ app.factory('PredictionsModel', function($http, $q) {
                     });
                 }
 
-                if(result.length === 1 && result[0] === void 0) {
+                if (result.length === 1 && result[0] === void 0) {
                     result.length = 0;
                 }
 
                 return result;
-            }
-        );
+            }, function (e) {
+                console.log("Exception");
+            });
     }
 
     function railRegional(stopId) {
@@ -87,18 +95,25 @@ app.factory('PredictionsModel', function($http, $q) {
 
         var url = "http://scalaws.riits.net/app.php/api/stops/region-rails" // prod
 
-        return $http.get(url).then(function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
             var result, ref;
             result = [];
             if ((ref = response.data) != null) {
-                ref.some(function(item) {
+                ref.some(function (item) {
                     var prediction;
                     prediction = {
                         id: item.id,
                         route: item.title,
                         color: item.color,
                         icon: item.icon,
-                        predictions: item.scheduled_times.split(',').map(function(txt) {
+                        predictions: item.scheduled_times.split(',').map(function (txt) {
                             return {
                                 text: txt || "Timings is not available"
                             };
@@ -114,6 +129,8 @@ app.factory('PredictionsModel', function($http, $q) {
             }
 
             return result;
+        }, function (e) {
+            console.log("Exception");
         });
     }
 
@@ -122,21 +139,28 @@ app.factory('PredictionsModel', function($http, $q) {
 
         url = "http://scalaws.riits.net/app.php/api/stops/buses"; //prod
 
-        return $http.get(url).then(function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
             var result, ref;
-            response.data = response.data.filter(function(item){
+            response.data = response.data.filter(function (item) {
                 return item;
             });
 
             result = [];
             if ((ref = response.data) != null) {
-                ref.some(function(item) {
+                ref.some(function (item) {
                     var prediction;
                     prediction = {
                         id: item.id,
                         route: item.title,
                         color: item.color,
-                        predictions: item.scheduled_times.split(',').map(function(txt) {
+                        predictions: item.scheduled_times.split(',').map(function (txt) {
                             return {
                                 text: txt || 'Timings is not avaialle'
                             };
@@ -153,15 +177,26 @@ app.factory('PredictionsModel', function($http, $q) {
                 result.length = 0;
             }
             return result;
+        }, function (e) {
+            console.log("Exception");
         });
     }
 
     function bikeShare(stations) {
         var url;
         url = "http://scalaws.riits.net/app.php/api/stops/bike-share";
-        return $http.get(url).then(function(response) {
-            return _.map(response.data, function(item) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
+            return _.map(response.data, function (item) {
                 return item.properties;
+            }, function (e) {
+                console.log("Exception");
             });
         });
     }
@@ -169,53 +204,96 @@ app.factory('PredictionsModel', function($http, $q) {
     function twitter(stations) {
         var url;
         url = "http://scalaws.riits.net/app.php/api/tweets";
-        return $http.get(url).then(function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
             return response.data;
+        }, function (e) {
+            console.log("Exception");
         });
     }
 
     function advisories(texts) {
         var url = "http://scalaws.riits.net/app.php/api/adviser";
-        return $http.get(url).then(function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
             return response.data;
+        }, function (e) {
+            console.log("Exception");
         });
     }
 
     function getDiectionsData(texts) {
         var url = "http://scalaws.riits.net/api/route-stops?orig=-118.37380526389, 34.019311328588&dest=-118.04452116127, 34.07227186734";
 
-        return $http.get(url).then(function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
             return response.data;
+        }, function (e) {
+            console.log("Exception");
         });
     }
 
     function metroAlerts(texts) {
         var url = "http://scalaws.riits.net/app.php/api/tweets/light-rails-alerts";
-        return $http.get(url).then(function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
             var filtered;
             filtered = [];
 
-            response.data.forEach(function(item) {
+            response.data.forEach(function (item) {
                 if (item.hasAlert) {
                     return filtered.push(item);
                 }
             });
 
             return filtered;
+        }, function (e) {
+            console.log("Exception");
         });
     }
 
     function stationBus(stationId) {
         var url = "http://socaltransport.org/tm/node_time_v2.php?format=json&node_id=" + stationId;
 
-        return $http.get(url).then(function(response) {
+        return $http({
+            method: "GET",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function (response) {
             var result = response.data.node_time;
-            result = _.chain(result.filter(function(item) {
+            result = _.chain(result.filter(function (item) {
                 return !!item;
-            }).map(function(val, key) {
+            }).map(function (val, key) {
                 var p;
                 val.scheduled_times = val.scheduled_times.split(',');
-                val.predictions = (function() {
+                val.predictions = (function () {
                     var i, len, ref, results;
                     ref = val.scheduled_times;
                     results = [];
@@ -229,15 +307,17 @@ app.factory('PredictionsModel', function($http, $q) {
                     return results;
                 })();
                 return val;
-            }).groupBy(function(item) {
+            }).groupBy(function (item) {
                 var ref;
                 return +((ref = item.location) != null ? ref.split(' BAY ')[1] : void 0);
-            }).reduce((function(res, val, key){
+            }).reduce((function (res, val, key) {
                 res[key] = val;
                 res[key] = res[key].slice(0, 5);
                 return res;
             }), {}.value()));
             return result;
+        }, function (e) {
+            console.log("Exception");
         });
     }
 });

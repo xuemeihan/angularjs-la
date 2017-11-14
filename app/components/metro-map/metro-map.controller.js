@@ -67,6 +67,8 @@ function MetroMapController($interval, $sce, Carousel, PredictionsModel, $timeou
           this.texts = this.response;
           this.response = null;
         }
+      }).catch(function (e) {
+          //TODO: show some notification
       });
     }
 

@@ -1,54 +1,60 @@
-MetroScheduleRailLocalController.$inject = ['$interval', 'moment', 'PredictionsModel', '$timeout', '$scope'];
+MetroScheduleRailLocalController.$inject = ['$interval', 'PredictionsModel', '$timeout', '$scope'];
 
-function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $timeout, $scope) {
+function MetroScheduleRailLocalController($interval, PredictionsModel, $timeout, $scope) {
 
     var vm = $scope;
-    this.showAlerts = false;
-    this.predictions = [];
-    this.intervalId = null;
-    this.timeoutId = null;
-    this.response = null;
-    vm.displayAlerts = function() {
-        $timeout(function() {
+    vm.showAlerts = false;
+    vm.predictions = [];
+    vm.intervalId = null;
+    vm.timeoutId = null;
+    vm.response = null;
+    vm.displayAlerts = function () {
+        $timeout(function () {
             $scope.$root.$broadcast('fetch-metro-alerts');
         }, 60000);
     }
-    $scope.$on('metro-alerts-fetched', function() {
+    $scope.$on('metro-alerts-fetched', function () {
         $scope.$root.$broadcast('scroll-metro-alerts');
-        this.showAlerts = true;
+        vm.showAlerts = true;
     });
 
-    $scope.$on('metro-alerts-scrolled', function() {
-        this.showAlerts = false;
+    $scope.$on('metro-alerts-scrolled', function () {
+        vm.showAlerts = false;
         vm.displayAlerts();
     });
-    $scope.$on('metro-alerts-not-fetched', function() {
+    $scope.$on('metro-alerts-not-fetched', function () {
         vm.displayAlerts();
     });
 
-    // this.refreshPredictions();
-    $interval(function() {
+    // vm.refreshPredictions();
+    $interval(function () {
         vm.refreshPredictions();
     }, 30000);
     vm.displayAlerts();
 
 
-    vm.scrollList = function() {
-        this.intervalId = $interval(function() {
+    vm.scrollList = function () {
+        vm.intervalId = $interval(function () {
+            /**
+             * Check if predictions
+             */
+            if (!vm.predictions) {
+                return;
+            }
             // get first item element
-            var prediction = this.predictions.shift();
-            this.timeoutId = $timeout(function() {
+            var prediction = vm.predictions.shift();
+            vm.timeoutId = $timeout(function () {
                 // wait when transtion ends and push first item element to end
                 if (prediction) {
-                    this.predictions.push(prediction)
+                    vm.predictions.push(prediction)
                 }
             }, 1000);
-            this.timeoutId.then(function() {
+            vm.timeoutId.then(function () {
                 // check if we have updates from server
-                if (this.response) {
+                if (vm.response) {
                     // insert new predictions to list
-                    this.response.forEach(function(res) {
-                        this.predictions.forEach(function(prediction) {
+                    vm.response.forEach(function (res) {
+                        vm.predictions.forEach(function (prediction) {
                             if (prediction.title === res.title) {
                                 prediction.predictions = res.predictions;
 
@@ -58,9 +64,9 @@ function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $
                             }
                         });
                     });
-                    this.predictions.forEach(function(item, ix) {
+                    vm.predictions.forEach(function (item, ix) {
                         if (item.$updated == null) {
-                            this.predictions.splice(ix, 1);
+                            vm.predictions.splice(ix, 1);
                             console.log('deleted item', item);
                         } else {
                             delete item.$updated;
@@ -68,14 +74,14 @@ function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $
                     });
 
                     // push new items
-                    this.response.forEach(function(item) {
+                    vm.response.forEach(function (item) {
                         if (item.$updated == null) {
-                            this.predictions.push(item);
+                            vm.predictions.push(item);
                             console.log('added item', item);
                         }
                     });
                     // predictions updated, clear storage
-                    this.response = null;
+                    vm.response = null;
                 }
             });
         }, 8000);
@@ -83,15 +89,25 @@ function MetroScheduleRailLocalController($interval, moment, PredictionsModel, $
 
     vm.refreshPredictions = function () {
         // TODO hardcoded stopId
-        PredictionsModel.railLocal('080214').then( function(predictions) {
-            this.response = predictions;
+        PredictionsModel.railLocal('080214').then(function (predictions) {
+
+            /**
+             * Check if predictions
+             */
+            if (!predictions) {
+                return;
+            }
+
+            vm.response = predictions;
 
             // populate list first time
-            if (this.intervalId == null) {
-                this.predictions = this.response;
-                this.response = null;
+            if (vm.intervalId == null) {
+                vm.predictions = vm.response;
+                vm.response = null;
                 vm.scrollList();
             }
+        }).catch(function (e) {
+            //TODO: show some notification
         });
     }
 

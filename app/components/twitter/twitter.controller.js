@@ -1,8 +1,8 @@
 
 
-TwitterController.$inject = ['$scope', '$interval', 'moment', 'PredictionsModel', '$timeout'];
+TwitterController.$inject = ['$scope', '$interval', 'PredictionsModel', '$timeout'];
 
-function TwitterController($scope, $interval, $moment, PredictionsModel, $timeout){
+function TwitterController($scope, $interval, PredictionsModel, $timeout){
 
   $scope.predictions = [];
     $scope.intervalId = null; // shift list item from start interval
@@ -55,6 +55,9 @@ function TwitterController($scope, $interval, $moment, PredictionsModel, $timeou
 
       promise = PredictionsModel.twitter();
       promise.then(function(response) {
+        if(!response){
+          return;
+        }
         response.forEach(function(item) {
           return $scope.predictions.push(item);
         });
@@ -63,6 +66,9 @@ function TwitterController($scope, $interval, $moment, PredictionsModel, $timeou
           $scope.prediction = $scope.predictions.shift();
           return $scope.scrollList();
         }
+      }).catch(function (e) {
+        console.log('Exception here --- ');
+          //TODO: show some notification
       });
 
       promise.finally(function() {

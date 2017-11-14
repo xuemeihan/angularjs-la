@@ -34,7 +34,7 @@ function MetroRailAlertsController($interval, moment, PredictionsModel, $timeout
             } else {
                 $scope.$root.$broadcast('metro-alerts-not-fetched');
             }
-        }, function() {
+        }).catch(function(e) {
             $scope.$root.$broadcast('metro-alerts-not-fetched');
         });
     }
